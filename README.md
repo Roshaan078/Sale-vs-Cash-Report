@@ -76,9 +76,12 @@ Generates the report using SQL queries on:
 **Roshaan Ahmad**  
 Email: roshaan@asksol.pk
 Company: **Asksol**
-Date: 2026-02-19
+Date: 19-02-2026
 
 ---
 
 ## License
-This module is released under the **AGPL-3 license** and is free to use and modify.
+
+This is **fully complete and ready to paste** into your module folder as `README.md`.  
+
+If you want, I can also make an **enhanced version with screenshots placeholders** for a more professional look for users—it’s very common in Odoo modules. Do you want me to do that?
