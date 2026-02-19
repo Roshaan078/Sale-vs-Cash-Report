@@ -1,0 +1,81 @@
+<odoo xmlns:border="http://www.w3.org/1999/xhtml">
+    <template id="sale_vs_cash_template">
+        <t t-call="web.basic_layout">
+            <main>
+                <div style="text-align:center;">
+                    <h2>Sale vs Cash Report</h2>
+<!--                     <p>-->
+<!--                        <t t-if="data and data.get('form') and data['form'].get('date_from')">-->
+<!--                            <span style="margin-right:5px;">From:</span>-->
+<!--                            <span t-esc="datetime.datetime.strptime(data['form']['date_from'], '%Y-%m-%d').strftime('%d/%m/%Y')" style="margin-right:15px;"/>-->
+<!--                        </t>-->
+<!--                        <t t-if="data and data.get('form') and data['form'].get('date_to')">-->
+<!--                            <span style="margin-right:5px;">To:</span>-->
+<!--                            <span t-esc="datetime.datetime.strptime(data['form']['date_to'], '%Y-%m-%d').strftime('%d/%m/%Y')"/>-->
+<!--                        </t>-->
+<!--                    </p>-->
+                    <p>
+                        From: <t t-esc="date_from"/>
+                        To: <t t-esc="date_to"/>
+                    </p>
+                </div>
+
+                <table class="table table-sm" style="width:100%; border:1px solid #000; border-collapse: collapse;">
+                    <thead>
+                        <tr style="background-color: #f2f2f2;">
+                            <th style="border:1px solid #000;">Customer</th>
+                            <th style="border:1px solid #000;">Opening</th>
+                            <th style="text-align:right; border:1px solid #000;">Total Sale</th>
+                            <th style="text-align:right; border:1px solid #000;">Total Cash</th>
+                            <th style="text-align:right; border:1px solid #000;">Balance</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="docs" t-as="line">
+                            <tr>
+                                <td style="border:1px solid #000;"><t t-esc="line['partner_name']"/></td>
+                                <td style="text-align:right; border:1px solid #000;"><t t-esc="'{:,.0f}'.format(line['opening_balance'])"/></td>
+                                <td style="text-align:right; border:1px solid #000;"><t t-esc="'{:,.0f}'.format(line['total_sale'])"/></td>
+                                <td style="text-align:right; border:1px solid #000;"><t t-esc="'{:,.0f}'.format(line['total_cash'])"/></td>
+                                <td style="text-align:right; border:1px solid #000;"><t t-esc="'{:,.0f}'.format(line['balance'])"/></td>
+                            </tr>
+                        </t>
+                    </tbody>
+                     <tfoot>
+                        <tr style="font-weight:bold; background-color:#e6e6e6;">
+                            <td style="text-align:right; border:1px solid #000;">Grand Total:</td>
+                            <td style="text-align:right; border:1px solid #000;"><t t-esc="'{:,.0f}'.format(sum(line['opening_balance'] for line in docs))"/></td>
+                            <td style="text-align:right; border:1px solid #000;"><t t-esc="'{:,.0f}'.format(sum(line['total_sale'] for line in docs))"/></td>
+                            <td style="text-align:right; border:1px solid #000;"><t t-esc="'{:,.0f}'.format(sum(line['total_cash'] for line in docs))"/></td>
+                            <td style="text-align:right; border:1px solid #000;"><t t-esc="'{:,.0f}'.format(sum(line['balance'] for line in docs))"/></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </main>
+        </t>
+    </template>
+
+    <record id="paperformat_sale_vs_cash_custom" model="report.paperformat">
+        <field name="name">Sale Cash Report</field>
+        <field name="default" eval="True"/>
+        <field name="format">A4</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">10</field>
+        <field name="margin_bottom">12</field>
+        <field name="margin_left">7</field>
+        <field name="margin_right">7</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">3</field>
+        <field name="dpi">110</field>
+    </record>
+
+    <record id="sale_vs_cash_report_action" model="ir.actions.report">
+        <field name="name">Sale Vs Cash Report</field>
+        <field name="model">ask_sale_vs_cash_report.ask_sale_vs_cash_report</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">ask_sale_vs_cash_report.sale_vs_cash_template</field>
+        <field name="report_file">ask_sale_vs_cash_report.sale_vs_cash_template</field>
+        <field name="paperformat_id" ref="ask_sale_vs_cash_report.paperformat_sale_vs_cash_custom"/>
+    </record>
+
+</odoo>

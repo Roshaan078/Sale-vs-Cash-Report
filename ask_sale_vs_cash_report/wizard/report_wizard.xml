@@ -1,0 +1,43 @@
+<odoo>
+  <data>
+
+    <record model="ir.ui.view" id="ask_sale_vs_cash_report.form">
+      <field name="name">ask_sale_vs_cash_report form</field>
+      <field name="model">ask_sale_vs_cash_report.ask_sale_vs_cash_report</field>
+      <field name="arch" type="xml">
+        <form string="Accounting Sales vs Cash Report">
+          <sheet>
+              <group>
+                  <field name="partner_name" widget="many2many_tags"/>
+                  <field name="date_from"/>
+                  <field name="date_to"/>
+<!--                  <field name="opening_balance"/>-->
+              </group>
+          </sheet>
+          <footer>
+              <button name="action_print" string="Print" type="object" default_focus="1" class="oe_highlight"/>
+              or
+              <button name="action_export_excel" string="Export Excel" type="object" class="btn-primary"/>
+              or
+              <button string="Cancel" class="oe_link" special="cancel"/>
+          </footer>
+        </form>
+      </field>
+    </record>
+
+    <record id="action_ask_sale_vs_cash_report" model="ir.actions.act_window">
+        <field name="name">Sale Vs Cash Report</field>
+        <field name="res_model">ask_sale_vs_cash_report.ask_sale_vs_cash_report</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+     <menuitem
+            id="menu_account_report_pld"
+            name="Sale vs Cash Report"
+            action="action_ask_sale_vs_cash_report"
+            parent="account.menu_finance_reports"
+            sequence="28"
+        />
+  </data>
+</odoo>
