@@ -74,9 +74,9 @@ Generates the report using SQL queries on:
 
 ## Author
 **Roshaan Ahmad**  
-Email: roshaan@asksol.pk
-Company: **Asksol**
-Date: 19-02-2026
+- Email: roshaan@asksol.pk
+- Company: **Asksol**
+- Date: 19-02-2026
 
 ---
 
