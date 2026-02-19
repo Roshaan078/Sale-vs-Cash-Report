@@ -82,6 +82,4 @@ Generates the report using SQL queries on:
 
 ## License
 
-This is **fully complete and ready to paste** into your module folder as `README.md`.  
-
-If you want, I can also make an **enhanced version with screenshots placeholders** for a more professional look for users—it’s very common in Odoo modules. Do you want me to do that?
+This module is released under the **AGPL-3 license** and is free to use and modify.
